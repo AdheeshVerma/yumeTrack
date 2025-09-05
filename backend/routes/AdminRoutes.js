@@ -1,2 +1,4 @@
 const router = require('express').Router()
-router.post('add-anime/',add-anime);
+const adminCtrl = require('../controller/AdminCont');
+router.post('addAnime/',adminCtrl.addAnime);
+module.exports = router;

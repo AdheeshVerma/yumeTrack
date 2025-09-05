@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "seed": "node admin/seed.js"
   },
+  
   "keywords": [],
   "author": "Adheesh Verma",
   "license": "ISC",

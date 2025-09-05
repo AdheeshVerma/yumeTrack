@@ -9,7 +9,8 @@ const startAdminServer = require('./admin/AdminServer');
 //Middlewares Management
 const app = express();
 app.use(express.json());
-
+app.use('/api/admin',require('./routes/AdminRoutes'));
+app.use('/api/user',require('./routes/UserRoutes'));
 //method management
 
 
