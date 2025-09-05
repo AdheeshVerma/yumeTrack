@@ -16,7 +16,7 @@ app.use('/api/user',require('./routes/UserRoutes'));
 
 //Connect to MongoDB and start the server
 connectDB().then(() => {
-    app.listen(process.env.PORT || 3000, () => {
+    app.listen(process.env.ADMIN_PORT || 3000, () => {
         console.log(`Server is running on port ${process.env.PORT || 3000}`);
     });
     // Start Admin Server
