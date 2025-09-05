@@ -6,6 +6,7 @@ const AnimeSchema = new mongoose.Schema({
     genres: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }],
     ProductionStudio: { type: String },
     rating: { type: Number, min: 0, max: 10 },
+    reviews: [{type:mongoose.Schema.Types.ObjectId,ref:'Review'}]
     
 });
 const Anime = mongoose.model('Anime', AnimeSchema);
