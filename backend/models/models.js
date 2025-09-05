@@ -16,7 +16,8 @@ const Staff = require('./Anime/Staff');
 const review = require('./Anime/Reviews');
 
 //Admin Model
-const Admin = require('./Admin/Admin');
+const Admin = require('./Admin/admin');
+const report = require('./Admin/reports');
 
 //Export all models here
 module.exports = {
@@ -31,5 +32,6 @@ module.exports = {
     Anime,
     Forum,
     ForumChats,
-    Admin
+    Admin,
+    report
 };
