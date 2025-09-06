@@ -1,5 +1,5 @@
 const Review = require('../models/Anime/Reviews.js');
-const {User , AnimeList , UserPreference, ForumChats,Forum} = require('../models/models.js');
+const {User , AnimeList , UserPreference, ForumChats,Forum,Anime} = require('../models/models.js');
 const {generateToken} = require('../utils/TokenGen.js');
 const bcrypt = require('bcrypt');
 const { sendWelcomeMail } = require("../utils/Mailer.js");
@@ -76,8 +76,13 @@ exports.logout = async (req, res) => {
 
 exports.getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
-    res.status(200).json(user);
+    const user = await User.findOne(req.user.email);
+    res.status(200).json({
+      message:"User Found",
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
@@ -89,6 +94,7 @@ exports.updateMe = async (req, res) => {
       username, email, password
     } = req.body;
     const user = await User.findByIdAndUpdate(req.user.id, { username, email, password }, { new: true }).select("-password");
+    console.log(user);
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });

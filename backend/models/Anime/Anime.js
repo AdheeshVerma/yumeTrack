@@ -5,7 +5,7 @@ const AnimeSchema = new mongoose.Schema({
     description: { type: String, required: true },
     genres: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }],
     ProductionStudio: { type: String },
-    status: { type: String, enum: ['Ongoing', 'Completed', 'Hiatus'], default: 'Ongoing' },
+    status: { type: String, enum: ['Ongoing', 'Completed', 'Plan to Watch'], default: 'Ongoing' },
     startDate: { type: Date, default: null },
     endDate: { type: Date, default: null },
     Format: { type: String, enum: ['TV', 'Movie', 'OVA', 'ONA', 'TV Short'], default: 'TV' },
