@@ -2,7 +2,7 @@
 
 //User Model
 const User = require('./User/User');
-const UserPrefrence =require('./User/UserPreference');
+const UserPreference =require('./User/UserPreference');
 const AnimeList = require('./User/AnimeList');
 
 //Anime Model
@@ -22,7 +22,7 @@ const report = require('./Admin/reports');
 //Export all models here
 module.exports = {
     User,
-    UserPrefrence,
+    UserPreference,
     AnimeList,
     Genre,
     Episode,
