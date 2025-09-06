@@ -1,5 +1,7 @@
 const express = require('express');
 const AdminApp = express();
+const AdminRoutes = require('../routes/AdminRoutes');
+
 
 //Middlewares Management
 AdminApp.use(express.json());

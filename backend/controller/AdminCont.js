@@ -1,3 +1,4 @@
+
 const {Admin,Anime, Genre, Episode, Character, report} = require('../models/models');
 const {generateToken} = require('../utils/TokenGen.js');
 const bcrypt = require('bcrypt');
