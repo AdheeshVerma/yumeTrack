@@ -111,7 +111,7 @@ exports.deleteMe = async (req, res) => {
 
 exports.showUserAnimeList = async (req, res) => {
   try {
-    const animeList = await Anime.find({ user: req.user.id });
+    const animeList = await AnimeList.find({ user: req.user.id });
     res.status(200).json(animeList);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
@@ -130,7 +130,8 @@ exports.addToAnimeList = async (req, res) => {
 
 exports.updateAnimeList = async (req, res) => {
   try {
-    const { animeId, status } = req.body;
+    const { status } = req.body;
+    const {animeId} = req.params;
     const updatedEntry = await AnimeList.findOneAndUpdate(
       { user: req.user.id, anime: animeId },
       { status },
@@ -168,7 +169,7 @@ exports.userPrefrence = async (req, res) => {
     const newResult = {
       user: userId,
       answers,
-      prefrences: genreIds
+      preferences: genreIds
     }
     const Pref = await UserPreference.create(newResult);
     res.status(200).json(Pref);
