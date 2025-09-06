@@ -8,7 +8,6 @@ AdminApp.use(express.json());
 AdminApp.use(express.urlencoded({ extended: true }));
 
 //Routes
-const AdminRoutes = require('../routes/AdminRoutes');
 AdminApp.use('/api/admin', AdminRoutes);
 
 const startAdminServer = (port) => {

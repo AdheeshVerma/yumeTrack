@@ -2,7 +2,7 @@ const Review = require('../models/Anime/Reviews.js');
 const {User , AnimeList , UserPreference, ForumChats,Forum} = require('../models/models.js');
 const {generateToken} = require('../utils/TokenGen.js');
 const bcrypt = require('bcrypt');
-
+const { sendWelcomeMail } = require("../utils/Mailer.js");
 
 exports.register = async (req, res) => {
   try {
@@ -20,7 +20,7 @@ exports.register = async (req, res) => {
       email,
       password: hashedPassword
     });
-
+    await sendWelcomeMail(newUser.email, newUser.username);
     const token = generateToken(newUser);
 
     res.status(201).json({
