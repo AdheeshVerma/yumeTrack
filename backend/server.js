@@ -6,14 +6,12 @@ require('dotenv').config();
 const connectDB = require('./config/mongoDB');
 const startAdminServer = require('./admin/AdminServer');
 const UserRoutes = require('./routes/UserRoutes');
-const AdminRoutes = require('./routes/AdminRoutes');
 
 //Middlewares Management
 const app = express();
 app.use(express.json());
 
 //method management
-app.use('/api/admin',AdminRoutes);
 app.use('/api/user',UserRoutes);
 
 //Connect to MongoDB and start the server

@@ -1,33 +1,34 @@
-const {Anime, Genre, Episode, Character, report} = require('../models/models');
-const generateToken = require('../utils/TokenGen.js');
+    const {Anime, Genre, Episode, Character, report} = require('../models/models');
+    const {generateToken} = require('../utils/TokenGen.js');
+    const {Admin} = require("../models/models.js")
+    const bcrypt = require("bcrypt")
 
-exports.adminLogin = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const admin = await Admin.findOne({ email });
+    exports.adminLogin = async (req, res) => {
+        try {
+            const { username, password } = req.body;
+            const admin = await Admin.findOne({ username });
 
-        if (!admin) return res.status(400).json({ message: "Invalid credentials" });
+            if (!admin) return res.status(400).json({ message: "Invalid credentials" });
 
-        const isMatch = await bcrypt.compare(password, admin.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        }
+            const isMatch = await bcrypt.compare(password, admin.password);
+            if (!isMatch) {
+                return res.status(400).json({ message: 'Invalid credentials' });
+            }
 
-        const token = generateToken(admin);
+            const token = generateToken(admin);
 
-        res.json({
-          message: "Login successful",
-          user: {
-            id: admin._id,
-            username: admin.username,
-            email: admin.email,
-          },
-          token,
-        });
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
-  }
-};
+            res.json({
+            message: "Login successful",
+            user: {
+                id: admin._id,
+                username: admin.username,
+            },
+            token,
+            });
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+    };
 
 exports.addGenre = async (req, res) => {
     try {
