@@ -1,10 +1,11 @@
-const {Anime, Genre, Episode, Character, report} = require('../models/models');
-const generateToken = require('../utils/TokenGen.js');
+const {Admin,Anime, Genre, Episode, Character, report} = require('../models/models');
+const {generateToken} = require('../utils/TokenGen.js');
+const bcrypt = require('bcrypt');
 
 exports.adminLogin = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const admin = await Admin.findOne({ email });
+        const { username, password } = req.body;
+        const admin = await Admin.findOne({ username });
 
         if (!admin) return res.status(400).json({ message: "Invalid credentials" });
 
