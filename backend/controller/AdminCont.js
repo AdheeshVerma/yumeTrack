@@ -1,34 +1,35 @@
-    const {Anime, Genre, Episode, Character, report} = require('../models/models');
-    const {generateToken} = require('../utils/TokenGen.js');
-    const {Admin} = require("../models/models.js")
-    const bcrypt = require("bcrypt")
 
-    exports.adminLogin = async (req, res) => {
-        try {
-            const { username, password } = req.body;
-            const admin = await Admin.findOne({ username });
+const {Admin,Anime, Genre, Episode, Character, report} = require('../models/models');
+const {generateToken} = require('../utils/TokenGen.js');
+const bcrypt = require('bcrypt');
 
-            if (!admin) return res.status(400).json({ message: "Invalid credentials" });
+exports.adminLogin = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const admin = await Admin.findOne({ username });
 
-            const isMatch = await bcrypt.compare(password, admin.password);
-            if (!isMatch) {
-                return res.status(400).json({ message: 'Invalid credentials' });
-            }
+        if (!admin) return res.status(400).json({ message: "Invalid credentials" });
 
-            const token = generateToken(admin);
+        const isMatch = await bcrypt.compare(password, admin.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
 
-            res.json({
-            message: "Login successful",
-            user: {
-                id: admin._id,
-                username: admin.username,
-            },
-            token,
-            });
-    } catch (err) {
-        res.status(500).json({ message: "Server error", error: err.message });
-    }
-    };
+        const token = generateToken(admin);
+
+        res.json({
+          message: "Login successful",
+          user: {
+            id: admin._id,
+            username: admin.username,
+            email: admin.email,
+          },
+          token,
+        });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
 
 exports.addGenre = async (req, res) => {
     try {

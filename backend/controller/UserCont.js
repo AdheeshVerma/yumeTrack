@@ -1,6 +1,6 @@
 const Review = require('../models/Anime/Reviews.js');
 const {User , AnimeList , UserPreference, ForumChats,Forum} = require('../models/models.js');
-const generateToken = require('../utils/TokenGen.js');
+const {generateToken} = require('../utils/TokenGen.js');
 const bcrypt = require('bcrypt');
 
 
