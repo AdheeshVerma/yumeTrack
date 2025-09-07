@@ -3,7 +3,13 @@ const mongoose = require('mongoose');
 const ReviewSchema = new mongoose.Schema({
     anime:{type:mongoose.Schema.Types.ObjectId,ref:'Anime',required:true},
     writer:{type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
-    rating:{type:Number,min:0,max:10,required:true},
+    ratings: [
+        {
+            user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+            value: { type: Number, min: 0, max: 10, required: true }
+        }
+    ],
+    averageRating: { type: Number, min: 0, max: 10, default: null },
     review:{type:String,required:true},
     likes:[{type:mongoose.Schema.Types.ObjectId,ref:'User'}],
 },{timestamps:true});

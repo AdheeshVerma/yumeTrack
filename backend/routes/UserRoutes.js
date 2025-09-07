@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {body} = require('express-validator');
-const {register,login,getMe,updateMe,deleteMe,logout,showUserAnimeList,addToAnimeList,updateAnimeList,removeFromAnimeList,userPrefrence,getUserPrefrence,registerReport} = require ("../controller/UserCont");
+const {register,login,getMe,updateMe,deleteMe,logout,showUserAnimeList,addToAnimeList,updateAnimeList,removeFromAnimeList,userPrefrence,getUserPrefrence,registerReport,followUser} = require ("../controller/UserCont");
 const auth = require('../middleware/UserAuthen');
 
 router.post('/register',
@@ -43,5 +43,6 @@ router.delete("/list/:animeId",auth,removeFromAnimeList);
 router.post("/preference",auth,userPrefrence);
 router.get("/preference",auth,getUserPrefrence);
 router.post('/report/:item_type/:item_id', auth,registerReport);
+router.post('/follow/:userId', auth,followUser);
 
 module.exports = router;
