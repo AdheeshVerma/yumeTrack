@@ -9,5 +9,10 @@ const ForumChatsSchema = new mongoose.Schema({
     sent_by:{type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
     status:{type:String,enum:['sent','delivered','read','failed'],default:'sent'}
 },{timestamps:true});
+
+ForumChatsSchema.index({ forum: 1 , createdAt: -1 });
+ForumChatsSchema.index({ sent_by: 1 });
+ForumChatsSchema.index({ parentMessage: 1 });
+
 const ForumChats = mongoose.model('ForumChats', ForumChatsSchema);
 module.exports = ForumChats;

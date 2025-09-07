@@ -12,6 +12,9 @@ const AnimeSchema = new mongoose.Schema({
     totalEpisodes: { type: Number, default: 0 },
     latestEpisode: { type: Number, default: 0 },
     avgRating: { type: Number, min: 0, max: 10, default: null },
+    ratings: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, rating: { type: Number, min: 0, max: 10 } }],
+    popularity: { type: Number, default: 0 },
+    views: { type: Number, default: 0 },
     coverImage: { type: String, default: null },
     bannerImage: { type: String, default: null },
     synonyms: [{ type: String }]
